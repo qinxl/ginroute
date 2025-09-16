@@ -1,7 +1,7 @@
 package ginroute
 
 import (
-	"ginroute/internal/astparser"
+	"github.com/qinxl/ginroute/internal/astparser"
 	"go/token"
 	"io/fs"
 	"log"
