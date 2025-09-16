@@ -5,9 +5,13 @@ package main
 
 import "github.com/qinxl/ginroute"
 
+```go
 func main() {
 	cfg := &ginroute.GenCfg{
 		Path: "internal/routes", // 默认routes
 	}
 	ginroute.Generate(cfg)
 }
+```
+
+
