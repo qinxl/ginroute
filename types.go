@@ -1,4 +1,4 @@
-package astparser
+package ginroute
 
 type StructInfo struct {
 	GroupName string

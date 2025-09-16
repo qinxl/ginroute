@@ -1,7 +1,6 @@
 package ginroute
 
 import (
-	"github.com/qinxl/ginroute/internal/astparser"
 	"go/token"
 	"io/fs"
 	"log"
@@ -9,20 +8,20 @@ import (
 	"strings"
 )
 
-func Generate(cfg *astparser.GenCfg) {
+func Generate(cfg *GenCfg) {
 	if cfg == nil {
-		cfg = &astparser.GenCfg{
+		cfg = &GenCfg{
 			Path: "routes",
 		}
 	}
 	fset := token.NewFileSet()
-	structsMap := make(map[string]*astparser.StructInfo)
+	structsMap := make(map[string]*StructInfo)
 	err := filepath.Walk(cfg.Path, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		if !info.IsDir() && filepath.Ext(info.Name()) == ".go" && !strings.HasSuffix(info.Name(), "_gen.go") {
-			astparser.ProcessFile(fset, path, structsMap)
+			processFile(fset, path, structsMap)
 		}
 		return nil
 	})
@@ -30,9 +29,9 @@ func Generate(cfg *astparser.GenCfg) {
 		log.Fatal(err)
 	}
 
-	slice := make([]*astparser.StructInfo, 0, len(structsMap))
+	slice := make([]*StructInfo, 0, len(structsMap))
 	for _, v := range structsMap {
 		slice = append(slice, v)
 	}
-	astparser.GenerateRouterFile(cfg, slice)
+	generateRouterFile(cfg, slice)
 }

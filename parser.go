@@ -1,4 +1,4 @@
-package astparser
+package ginroute
 
 import (
 	"go/ast"
@@ -14,7 +14,7 @@ var (
 	regRoute      = regexp.MustCompile(`@(\w+)(?:\(["'](.*?)["']\))?`)
 )
 
-func ProcessFile(fset *token.FileSet, filename string, structsMap map[string]*StructInfo) {
+func processFile(fset *token.FileSet, filename string, structsMap map[string]*StructInfo) {
 	file, err := parser.ParseFile(fset, filename, nil, parser.ParseComments)
 	if err != nil {
 		log.Printf("解析文件 %s 出错: %v", filename, err)
