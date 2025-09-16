@@ -1,11 +1,10 @@
 # ginroute
 自动生成gin路由注册文件
-
+```go
 package main
 
 import "github.com/qinxl/ginroute"
 
-```go
 func main() {
 	cfg := &ginroute.GenCfg{
 		Path: "internal/routes", // 默认routes
